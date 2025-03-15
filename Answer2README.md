@@ -45,5 +45,11 @@ write command is set at the end with the file->f_op->write() instruction. This s
 should forward the call to the tty drivers' write function, con_write.  
 
  
+Bonus Task
 
+To implement the new system call sys_hellofanchao, we begin by adding the function definition in the kernel source. First, the function is added to sys.c with a simple printk call to print the message "Hello Fanchao!". Then, in include/unistd.h, the syscall number is defined as #define __NR_hellofanchao 74, assigning a unique syscall number to this new function.
+
+Next, the system call table is modified in sys_call_table.c (or sys.h) to include an entry for sys_hellofanchao. The table maps syscall numbers to their corresponding functions, ensuring that when the kernel receives syscall number 74, it will jump to sys_hellofanchao.
+
+Finally, the function is invoked in init/main.c within the main() function, ensuring that the new system call is executed early in the boot process. When the system boots, the message "Hello Fanchao!" is printed, demonstrating that the system call is correctly invoked.
  
